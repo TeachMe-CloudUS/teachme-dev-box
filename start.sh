@@ -8,14 +8,14 @@ if [[ ! -f "$CONFIG_FILE" ]]; then
 fi
 
 echo "🛑 Bringing down existing infrastructure services..."
-if ! docker compose down --remove-orphans; then
+if ! docker compose -f ./docker-compose.infrastructure.yaml down --remove-orphans; then
     echo "❌ Failed to bring down infrastructure services. Please check the Docker Compose file."
     exit 1
 fi
 
 # Start infrastructure services
 echo "🚀 Starting infrastructure services..."
-if ! docker compose up -d; then
+if ! docker compose -f ./docker-compose.infrastructure.yaml up -d; then
     echo "❌ Failed to start infrastructure services. Please check the Docker Compose file."
     exit 1
 fi

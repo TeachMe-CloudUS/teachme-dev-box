@@ -5,9 +5,16 @@ if (-Not (Test-Path $ConfigFile)) {
     exit 1
 }
 
+Write-Host "🛑 Bringing down existing infrastructure services..."
+docker compose -f ./docker-compose.infrastructure.yaml down --remove-orphans
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "❌ Failed to bring down service: $service. Please check its Docker Compose file." -ForegroundColor Red
+    exit 1
+}
+
 # Start infrastructure services
 Write-Host "🚀 Starting infrastructure services..."
-if (-Not (docker compose up -d)) {
+if (-Not (docker compose -f ./docker-compose.infrastructure.yaml up)) {
     Write-Host "❌ Failed to start infrastructure services. Please check the Docker Compose file." -ForegroundColor Red
     exit 1
 }

@@ -1,5 +1,0 @@
-include:
-  - docker-compose.infrastructure.yaml
-
-networks:
-  teachme-network:
