@@ -1,3 +1,6 @@
 [submodule "services/teachme-student-service"]
 	path = services/teachme-student-service
 	url = git@github.com:TeachMe-CloudUS/teachme-student-service.git
+[submodule "services/teachme-frontend"]
+	path = services/teachme-frontend
+	url = git@github.com:TeachMe-CloudUS/teachme-frontend.git
