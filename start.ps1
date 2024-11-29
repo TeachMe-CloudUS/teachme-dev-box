@@ -17,8 +17,18 @@ Get-Content $ConfigFile | ForEach-Object {
     if ($service) {
         $composeFile = "./services/$service/docker-compose.yml"
         if (Test-Path $composeFile) {
+
+            Write-Host "🛑 Bringing down existing service: $service and removing orphans..."
+            docker compose -f $composeFile down --remove-orphans
+            if ($LASTEXITCODE -ne 0) {
+                Write-Host "❌ Failed to bring down service: $service. Please check its Docker Compose file." -ForegroundColor Red
+                exit 1
+            }
+
+            # Start the service
             Write-Host "🚀 Starting service: $service..."
-            if (-Not (docker compose -f $composeFile up -d)) {
+            docker compose -f $composeFile up -d
+            if ($LASTEXITCODE -ne 0) {
                 Write-Host "❌ Failed to start service: $service. Please check its Docker Compose file." -ForegroundColor Red
                 exit 1
             }
@@ -28,5 +38,6 @@ Get-Content $ConfigFile | ForEach-Object {
         }
     }
 }
+
 
 Write-Host "✅ Successfully started dev-box 📦😊" -ForegroundColor Green
