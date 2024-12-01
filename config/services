@@ -1,1 +1,2 @@
-teachme-student-service
+./docker-compose.student-service.yaml
+./docker-compose.frontend.yaml

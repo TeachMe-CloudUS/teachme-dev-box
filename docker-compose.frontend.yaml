@@ -1,3 +1,5 @@
+name: teachme-frontend
+
 services:
   teachme-frontend:
     build:
@@ -8,3 +10,7 @@ services:
       - "5173:5173"
     networks:
       - teachme-network
+
+networks:
+  teachme-network:
+    external: true
