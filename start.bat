@@ -17,7 +17,7 @@ if errorlevel 1 (
 
 :: Start infrastructure services
 echo 🚀 Starting infrastructure services...
-docker compose -f ./docker-compose.infrastructure.yaml up -d
+docker compose --env-file .env.dev -f ./docker-compose.infrastructure.yaml up -d
 if errorlevel 1 (
     echo ❌ Failed to start infrastructure services. Please check the Docker Compose file.
     exit /b 1
@@ -38,7 +38,7 @@ for /f "usebackq tokens=*" %%A in ("%CONFIG_FILE%") do (
 
             :: Start the service
             echo 🚀 Starting service: !service!...
-            docker compose -f "!COMPOSE_FILE!" up -d
+            docker compose --env-file .env.dev -f "!COMPOSE_FILE!" up -d
             if errorlevel 1 (
                 echo ❌ Failed to start service: !service!. Please check its Docker Compose file.
                 exit /b 1

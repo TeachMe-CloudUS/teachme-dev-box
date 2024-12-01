@@ -15,7 +15,7 @@ fi
 
 # Start infrastructure services
 echo "🚀 Starting infrastructure services..."
-if ! docker compose -f ./docker-compose.infrastructure.yaml up -d; then
+if ! docker compose --env-file .env.dev  -f ./docker-compose.infrastructure.yaml up -d; then
     echo "❌ Failed to start infrastructure services. Please check the Docker Compose file."
     exit 1
 fi
@@ -33,7 +33,7 @@ while IFS= read -r service || [[ -n "$service" ]]; do
             fi
 
             # Start the service
-            if ! docker compose -f "$COMPOSE_FILE" up -d; then
+            if ! docker compose --env-file .env.dev -f "$COMPOSE_FILE" up -d; then
                 echo "❌ Failed to start service: $service. Please check its Docker Compose file."
                 exit 1
             fi

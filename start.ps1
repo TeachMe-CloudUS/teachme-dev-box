@@ -14,7 +14,7 @@ if ($LASTEXITCODE -ne 0) {
 
 # Start infrastructure services
 Write-Host "🚀 Starting infrastructure services..."
-if (-Not (docker compose -f ./docker-compose.infrastructure.yaml up)) {
+if (-Not (docker compose --env-file .env.dev -f ./docker-compose.infrastructure.yaml up)) {
     Write-Host "❌ Failed to start infrastructure services. Please check the Docker Compose file." -ForegroundColor Red
     exit 1
 }
@@ -34,7 +34,7 @@ Get-Content $ConfigFile | ForEach-Object {
 
             # Start the service
             Write-Host "🚀 Starting service: $service..."
-            docker compose -f $composeFile up -d
+            docker compose --env-file .env.dev -f $composeFile up -d
             if ($LASTEXITCODE -ne 0) {
                 Write-Host "❌ Failed to start service: $service. Please check its Docker Compose file." -ForegroundColor Red
                 exit 1
