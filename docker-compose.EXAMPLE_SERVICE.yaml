@@ -1,0 +1,61 @@
+name: <EXAMPLE_SERVICE>
+
+services:
+  student-service:
+    build:
+      context: ./services/teachme-<EXAMPLE_SERVICE>
+      dockerfile: Dockerfile.dev
+      secrets:
+        - source: maven_settings
+    container_name: <EXAMPLE_SERVICE>
+    volumes:
+      - ./services/<EXAMPLE_SERVICE>:/app
+      - ./services/<EXAMPLE_SERVICE>/target:/app/target
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DEVTOOLS_RESTART_ENABLED=true
+    ports:
+      - "8080"
+      - "35729"
+    depends_on:
+      - mongo-db
+      - redis-cache
+    networks:
+      - teachme-network
+      - proxy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.<EXAMPLE_SERVICE>.rule=Host(`<EXAMPLE_SERVICE>.localhost`)"
+      - "traefik.http.services.<EXAMPLE_SERVICE>.loadbalancer.server.port=8080"
+
+  mongo-db:
+    image: mongodb/mongodb-community-server:6.0.12-ubi8
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - "27017"
+    networks:
+      - teachme-network
+      - proxy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.<EXAMPLE_SERVICE>-db.rule=Host(`<EXAMPLE_SERVICE>.db.localhost`)"
+      - "traefik.http.services.<EXAMPLE_SERVICE>-db.loadbalancer.server.port=8080"
+
+  redis-cache:
+    image: redis/redis-stack-server:latest
+    ports:
+      - "6379"
+    networks:
+      - teachme-network
+
+secrets:
+  maven_settings:
+    file: ~/.m2/settings.xml
+
+networks:
+  teachme-network:
+    external: true
+  proxy-network:
+    external: true
