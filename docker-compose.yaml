@@ -1,0 +1,15 @@
+include:
+  - docker-compose.infrastructure.yaml
+  - docker-compose.frontend.yaml
+
+secrets:
+  maven_settings:
+    file: ~/.m2/settings.xml
+
+networks:
+  proxy-network:
+    name: proxy-network
+    driver: bridge
+  teachme-network:
+    name: teachme-network
+    driver: bridge
