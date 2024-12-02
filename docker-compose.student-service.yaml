@@ -8,8 +8,6 @@ services:
       secrets:
         - source: maven_settings
     container_name: student-service
-    env_file:
-      - .env.dev
     volumes:
       - ./services/teachme-student-service:/app
       - ./services/teachme-student-service/target:/app/target

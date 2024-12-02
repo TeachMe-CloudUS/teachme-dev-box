@@ -3,6 +3,26 @@
 CONFIG_FILE="./config/services"
 ENV_FILE=".env.dev"
 
+generate_secret_key() {
+    echo "🔑 Generating new 32-byte SECURITY_JWT_SECRET_KEY..."
+    HEX_KEY=$(openssl rand -hex 32)
+    BASE64_KEY=$(echo -n "$HEX_KEY" | base64)
+    if grep -q "SECURITY_JWT_SECRET_KEY" "$ENV_FILE"; then
+        sed -i '' "s/^SECURITY_JWT_SECRET_KEY=.*/SECURITY_JWT_SECRET_KEY=$BASE64_KEY/" "$ENV_FILE"
+        echo "✅ Updated SECURITY_JWT_SECRET_KEY in $ENV_FILE."
+    else
+        echo "SECURITY_JWT_SECRET_KEY=$BASE64_KEY" >> "$ENV_FILE"
+        echo "✅ Added SECURITY_JWT_SECRET_KEY to $ENV_FILE."
+    fi
+}
+
+if [[ ! -f "$ENV_FILE" ]]; then
+    echo "❌ Environment file not found: $ENV_FILE. Creating a new one..."
+    touch "$ENV_FILE"
+fi
+
+generate_secret_key
+
 if [[ ! -f "$CONFIG_FILE" ]]; then
     echo "❌ Configuration file not found: $CONFIG_FILE"
     exit 1
