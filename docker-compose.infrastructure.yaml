@@ -50,6 +50,7 @@ services:
       - AUTH_SERVICE_URI=http://auth-service
       - STUDENT_SERVICE_URI=http://student-service
       - FRONTEND_URI=http://frontend
+      - SECURITY_JWT_SECRET_KEY
     ports:
       - "8888:8080"
       - "35729"

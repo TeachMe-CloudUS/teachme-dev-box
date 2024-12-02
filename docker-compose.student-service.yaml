@@ -8,12 +8,17 @@ services:
       secrets:
         - source: maven_settings
     container_name: student-service
+    env_file:
+      - .env.dev
     volumes:
       - ./services/teachme-student-service:/app
       - ./services/teachme-student-service/target:/app/target
     environment:
       - SPRING_PROFILES_ACTIVE=dev
       - SPRING_DEVTOOLS_RESTART_ENABLED=true
+      - BLOB_STORAGE_CONTAINER_NAME=profile-pictures
+      - BLOB_STORAGE_CONNECTION_STRING=UseDevelopmentStorage=true;DevelopmentStorageProxyUri=http://blob-storage:10000
+      - SECURITY_JWT_SECRET_KEY
     ports:
       - "8080"
       - "35729"
@@ -49,6 +54,26 @@ services:
       - "6379"
     networks:
       - teachme-network
+
+  azurite-blob-storage:
+    container_name: blob-storage
+    image: mcr.microsoft.com/azure-storage/azurite:3.33.0
+    expose:
+      - 10000
+      - 10001
+      - 10002
+    ports:
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
+    volumes:
+      - blob-storage-volume:/data mcr.microsoft.com/azure-storage/azurite
+    networks:
+      - teachme-network
+
+
+volumes:
+  blob-storage-volume:
 
 secrets:
   maven_settings:
