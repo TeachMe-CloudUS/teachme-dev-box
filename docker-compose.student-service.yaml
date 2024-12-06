@@ -17,6 +17,7 @@ services:
       - BLOB_STORAGE_CONTAINER_NAME=profile-pictures
       - BLOB_STORAGE_CONNECTION_STRING=UseDevelopmentStorage=true;DevelopmentStorageProxyUri=http://blob-storage:10000
       - SECURITY_JWT_SECRET_KEY
+      - TEACHME_COURSE_SERVICE_URL=http://course-service
     ports:
       - "8080"
       - "35729"
