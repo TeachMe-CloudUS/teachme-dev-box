@@ -9,9 +9,11 @@ generate_secret_key() {
     BASE64_KEY=$(echo -n "$HEX_KEY" | base64)
     if grep -q "SECURITY_JWT_SECRET_KEY" "$ENV_FILE"; then
         sed -i '' "s/^SECURITY_JWT_SECRET_KEY=.*/SECURITY_JWT_SECRET_KEY=$BASE64_KEY/" "$ENV_FILE"
+        sed -i '' "s/^SECRET_KEY=.*/SECRET_KEY=$BASE64_KEY/" "$ENV_FILE"
         echo "✅ Updated SECURITY_JWT_SECRET_KEY in $ENV_FILE."
     else
         echo "SECURITY_JWT_SECRET_KEY=$BASE64_KEY" >> "$ENV_FILE"
+        echo "SECRET_KEY=$BASE64_KEY" >> "$ENV_FILE"
         echo "✅ Added SECURITY_JWT_SECRET_KEY to $ENV_FILE."
     fi
 }
@@ -37,7 +39,7 @@ fi
 
 # Start infrastructure services
 echo "🚀 Starting infrastructure services..."
-if ! docker compose --env-file "$ENV_FILE" -f ./docker-compose.yaml up -d; then
+if ! docker compose --env-file "$ENV_FILE" -f ./docker-compose.yaml up -d --build; then
     echo "❌ Failed to start infrastructure services. Please check the Docker Compose file."
     exit 1
 fi
@@ -56,7 +58,7 @@ while IFS= read -r compose_file || [[ -n "$compose_file" ]]; do
             fi
 
             # Start the service
-            if ! docker compose --env-file "$ENV_FILE" -f "$compose_file" up -d; then
+            if ! docker compose --env-file "$ENV_FILE" -f "$compose_file" up -d --build; then
                 echo "❌ Failed to start service for: $compose_file. Please check its Docker Compose file."
                 exit 1
             fi

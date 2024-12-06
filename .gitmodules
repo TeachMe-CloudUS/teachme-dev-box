@@ -7,3 +7,6 @@
 [submodule "services/teachme-api-gateway"]
 	path = services/teachme-api-gateway
 	url = git@github.com:TeachMe-CloudUS/teachme-api-gateway.git
+[submodule "services/teachme-auth-service"]
+	path = services/teachme-auth-service
+	url = git@github.com:TeachMe-CloudUS/teachme-auth-service.git
