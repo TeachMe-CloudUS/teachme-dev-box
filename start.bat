@@ -22,7 +22,7 @@ if %ERRORLEVEL% neq 0 (
     exit /b 1
 )
 
-for /f "tokens=*" %%i in (%CONFIG_FILE%) do (
+for /F "tokens=*" %%i in (%CONFIG_FILE%) do (
     set compose_file=%%i
     if not "%compose_file%"=="" (
         echo 🚀 Starting service from compose file: %compose_file%...

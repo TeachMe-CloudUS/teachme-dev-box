@@ -1,2 +1,3 @@
 ./docker-compose.student-service.yaml
 ./docker-compose.frontend.yaml
+./docker-compose.rating-service.yaml
