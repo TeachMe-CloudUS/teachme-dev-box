@@ -10,3 +10,9 @@
 [submodule "services/teachme-ratings-service"]
 	path = services/teachme-ratings-service
 	url = git@github.com:TeachMe-CloudUS/teachme-ratings-service.git
+[submodule "services/teachme-auth-service"]
+	path = services/teachme-auth-service
+	url = git@github.com:TeachMe-CloudUS/teachme-auth-service.git
+[submodule "services/teachme-course-service"]
+	path = services/teachme-course-service
+	url = git@github.com:TeachMe-CloudUS/teachme-course-service.git

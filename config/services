@@ -1,3 +1,5 @@
+./docker-compose.auth-service.yaml
 ./docker-compose.student-service.yaml
+./docker-compose.course-service.yaml
 ./docker-compose.frontend.yaml
 ./docker-compose.rating-service.yaml
