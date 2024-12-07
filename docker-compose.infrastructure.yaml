@@ -52,6 +52,7 @@ services:
       - RATING_SERVICE_URI=http://api/v1/course/{courseId}/ratings
       - FRONTEND_URI=http://frontend:5173
       - COURSE_SERVICE_URI=http://course-service
+      - RATING_SERVICE_URI=http://rating-service
       - FRONTEND_URI=http://frontend
       - SECURITY_JWT_SECRET_KEY
     ports:

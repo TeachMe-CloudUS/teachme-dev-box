@@ -1,0 +1,59 @@
+name: teachme-rating-service
+
+services:
+  rating-service:
+    build:
+      context: ./services/teachme-ratings-service
+      dockerfile: Dockerfile
+      secrets:
+        - source: maven_settings
+    container_name: ratings-service
+    volumes:
+      - ./services/teachme-ratings-service:/app
+      - ./services/teachme-ratings-service/target:/app/target
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DEVTOOLS_RESTART_ENABLED=true
+      - FEATURE_FLAG=true
+      - API_ENDPOINT=http://api/v1/course/{courseId}/ratings
+      - SPRING_DATA_MONGODB_URI=mongodb://user:pass@rating-service-mongo-db:27017
+      - SPRING_DATA_MONGODB_DATABASE=rating
+      - SECURITY_JWT_SECRET_KEY
+    ports:
+      - "8080"
+      - "35729"
+    depends_on:
+      - mongo-db
+    networks:
+      - teachme-network
+      - proxy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.teachme-rating-service.rule=Host(`teachme-rating-service.localhost`)"
+      - "traefik.http.services.teachme-rating-service.loadbalancer.server.port=8080"
+
+  mongo-db:
+    image: mongodb/mongodb-community-server:6.0.12-ubi8
+    container_name: rating-service-mongo-db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - "27017"
+    networks:
+      - teachme-network
+      - proxy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.teachme-rating-service-db.rule=Host(`teachme-rating-service.db.localhost`)"
+      - "traefik.http.services.teachme-rating-service-db.loadbalancer.server.port=8080"
+
+secrets:
+  maven_settings:
+    file: ~/.m2/settings.xml
+
+networks:
+  teachme-network:
+    external: true
+  proxy-network:
+    external: true
