@@ -12,7 +12,7 @@ services:
       - SPRING_PROFILES_ACTIVE=dev
       - SPRING_DEVTOOLS_RESTART_ENABLED=true
       - SECRET_KEY
-      - MONGODB_URI=mongodb://user:pass@mongo-db:27017
+      - MONGODB_URI=mongodb://user:pass@auth-service-mongo-db:27017
       - SPRING_DATA_MONGODB_DATABASE=user
     ports:
       - "8080"
@@ -29,11 +29,12 @@ services:
 
   mongo-db:
     image: mongodb/mongodb-community-server:6.0.12-ubi8
+    container_name: auth-service-mongo-db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=user
       - MONGO_INITDB_ROOT_PASSWORD=pass
     ports:
-      - "27017"
+      - "27020:27017"
     networks:
       - teachme-network
       - proxy-network

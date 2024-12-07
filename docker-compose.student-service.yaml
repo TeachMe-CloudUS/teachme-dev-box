@@ -18,6 +18,8 @@ services:
       - BLOB_STORAGE_CONNECTION_STRING=UseDevelopmentStorage=true;DevelopmentStorageProxyUri=http://blob-storage:10000
       - SECURITY_JWT_SECRET_KEY
       - TEACHME_COURSE_SERVICE_URL=http://course-service
+      - SPRING_DATA_MONGODB_URI=mongodb://user:pass@student-service-mongo-db:27017
+      - SPRING_DATA_MONGODB_DATABASE=students
     ports:
       - "8080"
       - "35729"
@@ -34,11 +36,12 @@ services:
 
   mongo-db:
     image: mongodb/mongodb-community-server:6.0.12-ubi8
+    container_name: student-service-mongo-db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=user
       - MONGO_INITDB_ROOT_PASSWORD=pass
     ports:
-      - "27017"
+      - "27018:27017"
     networks:
       - teachme-network
       - proxy-network
