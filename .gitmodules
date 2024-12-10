@@ -1,18 +1,18 @@
 [submodule "services/teachme-student-service"]
 	path = services/teachme-student-service
-	url = git@github.com:TeachMe-CloudUS/teachme-student-service.git
+	url = https://github.com/TeachMe-CloudUS/teachme-student-service.git
 [submodule "services/teachme-frontend"]
 	path = services/teachme-frontend
-	url = git@github.com:TeachMe-CloudUS/teachme-frontend.git
+	url = https://github.com/TeachMe-CloudUS/teachme-frontend.git
 [submodule "services/teachme-api-gateway"]
 	path = services/teachme-api-gateway
-	url = git@github.com:TeachMe-CloudUS/teachme-api-gateway.git
+	url = https://github.com/TeachMe-CloudUS/teachme-api-gateway.git
 [submodule "services/teachme-ratings-service"]
 	path = services/teachme-ratings-service
-	url = git@github.com:TeachMe-CloudUS/teachme-ratings-service.git
+	url = https://github.com/TeachMe-CloudUS/teachme-ratings-service.git
 [submodule "services/teachme-auth-service"]
 	path = services/teachme-auth-service
-	url = git@github.com:TeachMe-CloudUS/teachme-auth-service.git
+	url = https://github.com/TeachMe-CloudUS/teachme-auth-service.git
 [submodule "services/teachme-course-service"]
 	path = services/teachme-course-service
-	url = git@github.com:TeachMe-CloudUS/teachme-course-service.git
+	url = https://github.com/TeachMe-CloudUS/teachme-course-service.git

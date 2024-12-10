@@ -47,13 +47,11 @@ services:
         - source: maven_settings
     container_name: api-gateway
     environment:
-      - AUTH_SERVICE_URI=http://auth-service
-      - STUDENT_SERVICE_URI=http://student-service
-      - RATING_SERVICE_URI=http://api/v1/course/{courseId}/ratings
+      - AUTH_SERVICE_URI=http://auth-service:8080
+      - STUDENT_SERVICE_URI=http://student-service:8080
       - FRONTEND_URI=http://frontend:5173
-      - COURSE_SERVICE_URI=http://course-service
-      - RATING_SERVICE_URI=http://rating-service
-      - FRONTEND_URI=http://frontend
+      - COURSE_SERVICE_URI=http://course-service:8081
+      - RATING_SERVICE_URI=http://rating-service:8080
       - SECURITY_JWT_SECRET_KEY
     ports:
       - "8888:8080"
