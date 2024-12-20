@@ -3,3 +3,4 @@
 ./docker-compose.course-service.yaml
 ./docker-compose.frontend.yaml
 ./docker-compose.rating-service.yaml
+./docker-compose.forum-service.yaml
