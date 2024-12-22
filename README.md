@@ -30,6 +30,20 @@ git pull --recurse-submodules
 git submodule update --recursive --remote
 ```
 
+## Add setting.xml
+Finally, add your GitHub username and a personal access token to your ~/.m2/settings.xml file:
+```xml
+<settings>
+    <servers>
+        <server>
+            <id>github</id>
+            <username>{GITHUB_USERNAME}</username>
+            <password>{GITHUB_TOKEN}</password>
+        </server>
+    </servers>
+</settings>
+```
+
 ## Starting Dev-Box
 
 Depending on your operating system, follow the instructions below to start the development environment.
