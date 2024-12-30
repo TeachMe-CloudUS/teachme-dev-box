@@ -1,16 +1,16 @@
-name: <EXAMPLE_SERVICE>
+name: forum-service
 
 services:
-  <EXAMPLE_SERVICE>:
+  forum-service:
     build:
-      context: ./services/teachme-<EXAMPLE_SERVICE>
-      dockerfile: Dockerfile.dev
+      context: ./services/teachme-forum-service/forum
+      dockerfile: DockerFile
       secrets:
         - source: maven_settings
-    container_name: <EXAMPLE_SERVICE>
+    container_name: forum-service
     volumes:
-      - ./services/<EXAMPLE_SERVICE>:/app
-      - ./services/<EXAMPLE_SERVICE>/target:/app/target
+      - ./services/forum-service:/app
+      - ./services/forum-service/target:/app/target
     environment:
       - SPRING_PROFILES_ACTIVE=dev
       - SPRING_DEVTOOLS_RESTART_ENABLED=true
@@ -25,8 +25,8 @@ services:
       - proxy-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.<EXAMPLE_SERVICE>.rule=Host(`<EXAMPLE_SERVICE>.localhost`)"
-      - "traefik.http.services.<EXAMPLE_SERVICE>.loadbalancer.server.port=8080"
+      - "traefik.http.routers.forum-service.rule=Host(`forum-service.localhost`)"
+      - "traefik.http.services.forum-service.loadbalancer.server.port=8080"
 
   mongo-db:
     image: mongodb/mongodb-community-server:6.0.12-ubi8
@@ -40,8 +40,8 @@ services:
       - proxy-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.<EXAMPLE_SERVICE>-db.rule=Host(`<EXAMPLE_SERVICE>.db.localhost`)"
-      - "traefik.http.services.<EXAMPLE_SERVICE>-db.loadbalancer.server.port=8080"
+      - "traefik.http.routers.forum-service-db.rule=Host(`forum-service.db.localhost`)"
+      - "traefik.http.services.forum-service-db.loadbalancer.server.port=8080"
 
   redis-cache:
     image: redis/redis-stack-server:latest
