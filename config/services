@@ -4,3 +4,4 @@
 ./docker-compose.frontend.yaml
 ./docker-compose.rating-service.yaml
 ./docker-compose.forum-service.yaml
+./docker-compose.notification-service.yaml
