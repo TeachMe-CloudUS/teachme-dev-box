@@ -1,4 +1,4 @@
-name: forum-service
+name: teachme-forum-service
 
 services:
   forum-service:
@@ -8,47 +8,46 @@ services:
       secrets:
         - source: maven_settings
     container_name: forum-service
-    volumes:
-      - ./services/forum-service:/app
-      - ./services/forum-service/target:/app/target
     environment:
       - SPRING_PROFILES_ACTIVE=dev
       - SPRING_DEVTOOLS_RESTART_ENABLED=true
+      - BADWORDS_API_KEY
+      - BADWORDS_API_URL
+      - BASE_URL=http://auth-service:8080/api/v1/users/
+      - MONGODB_URI=mongodb://user:pass@forum-service-mongo-db:27017
+      - SPRING_DATA_MONGODB_DATABASE=forum
+
+
     ports:
       - "8080"
       - "35729"
     depends_on:
       - mongo-db
-      - redis-cache
     networks:
       - teachme-network
       - proxy-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.forum-service.rule=Host(`forum-service.localhost`)"
-      - "traefik.http.services.forum-service.loadbalancer.server.port=8080"
+      - "traefik.http.routers.teachme-forum-service.rule=Host(`teachme-forum-service.localhost`)"
+      - "traefik.http.services.teachme-forum-service.loadbalancer.server.port=8080"
 
   mongo-db:
     image: mongodb/mongodb-community-server:6.0.12-ubi8
+    container_name: forum-service-mongo-db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=user
       - MONGO_INITDB_ROOT_PASSWORD=pass
     ports:
-      - "27017"
+      - "27017:27017"
     networks:
       - teachme-network
       - proxy-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.forum-service-db.rule=Host(`forum-service.db.localhost`)"
-      - "traefik.http.services.forum-service-db.loadbalancer.server.port=8080"
+      - "traefik.http.routers.teachme-forum-service-db.rule=Host(`teachme-forum-service.db.localhost`)"
+      - "traefik.http.services.teachme-forum-service-db.loadbalancer.server.port=8080"
 
-  redis-cache:
-    image: redis/redis-stack-server:latest
-    ports:
-      - "6379"
-    networks:
-      - teachme-network
+  
 
 secrets:
   maven_settings:
