@@ -18,7 +18,7 @@ services:
       - SPRING_DATA_MONGODB_URI=mongodb://user:pass@notification-service-mongo-db:27017
       - SPRING_DATA_MONGODB_DATABASE=notifications
     ports:
-      - "8080"
+      - "7777:8080"
       - "35729"
     depends_on:
       - mongo-db
