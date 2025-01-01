@@ -22,3 +22,6 @@
 [submodule "services/teachme-certification-service"]
 	path = services/teachme-certification-service
 	url = https://github.com/TeachMe-CloudUS/teachme-certification-service.git
+[submodule "services/teachme-notification-service"]
+	path = services/teachme-notification-service
+	url = https://github.com/TeachMe-CloudUS/teachme-notification-service.git

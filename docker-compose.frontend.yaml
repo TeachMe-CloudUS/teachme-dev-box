@@ -9,6 +9,8 @@ services:
       - ./services/teachme-frontend:/app
       - /app/node_modules
     container_name: frontend
+    environment:
+      - VITE_WS_URI=ws://localhost:7777
     ports:
       - "5173:5173"
     networks:

@@ -55,6 +55,7 @@ services:
       - RATING_SERVICE_URI=http://rating-service:8080
       - CERTIFICATION_SERVICE_URI=http://certification-service:8080
       - FORUM_SERVICE_URI=http://forum-service:8080
+      - NOTIFICATION_SERVICE_URI=http://notification-service:8080
       - SECURITY_JWT_SECRET_KEY
     ports:
       - "8888:8080"
