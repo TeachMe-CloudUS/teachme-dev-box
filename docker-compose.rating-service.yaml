@@ -20,6 +20,7 @@ services:
       - SPRING_DATA_MONGODB_DATABASE=rating
       - SECURITY_JWT_SECRET_KEY
       - BASE_URL=http://auth-service:8080/api/v1/users/
+      - STUDENT_URL=http://student-service:8080/api/v1/students/me
     ports:
       - "8080"
       - "35729"
