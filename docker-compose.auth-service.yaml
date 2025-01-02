@@ -14,6 +14,7 @@ services:
       - SECRET_KEY
       - MONGODB_URI=mongodb://user:pass@auth-service-mongo-db:27017
       - SPRING_DATA_MONGODB_DATABASE=user
+      - SENDGRID_API_KEY 
     ports:
       - "8080"
       - "35729"
