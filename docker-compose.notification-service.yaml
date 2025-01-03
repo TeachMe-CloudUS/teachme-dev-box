@@ -17,6 +17,8 @@ services:
       - SECURITY_JWT_SECRET_KEY
       - SPRING_DATA_MONGODB_URI=mongodb://user:pass@notification-service-mongo-db:27017
       - SPRING_DATA_MONGODB_DATABASE=notifications
+      - TEACHME_STUDENT_SERVICE_URL=http://student-service:8080
+      - TEACHME_EMAIL_AZURE_FUNCTION_URL=http://mail-az-function
     ports:
       - "7777:8080"
       - "35729"
