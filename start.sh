@@ -36,7 +36,7 @@ while IFS= read -r compose_file || [[ -n "$compose_file" ]]; do
             fi
 
             # Start the service
-            if ! docker compose --env-file "$ENV_FILE" -f "$compose_file" up -d; then
+            if ! docker compose --env-file "$ENV_FILE" -f "$compose_file" up -d --build; then
                 echo "❌ Failed to start service for: $compose_file. Please check its Docker Compose file."
                 exit 1
             fi
