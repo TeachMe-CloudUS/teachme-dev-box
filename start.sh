@@ -17,7 +17,7 @@ fi
 
 # Start infrastructure services
 echo "🚀 Starting infrastructure services..."
-if ! docker compose --env-file "$ENV_FILE" -f ./docker-compose.yaml up -d --build; then
+if ! docker compose --env-file "$ENV_FILE" -f ./docker-compose.yaml up -d; then
     echo "❌ Failed to start infrastructure services. Please check the Docker Compose file."
     exit 1
 fi
