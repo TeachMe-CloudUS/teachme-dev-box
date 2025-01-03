@@ -21,6 +21,8 @@ services:
       - SECURITY_JWT_SECRET_KEY
       - BASE_URL=http://auth-service:8080/api/v1/users/
       - STUDENT_URL=http://student-service:8080/api/v1/students/me
+      - COURSES_URL=http://course-service:8081/api/v1/courses/
+      - RATING_URL=/rating
     ports:
       - "8080"
       - "35729"
