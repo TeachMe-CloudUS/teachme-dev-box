@@ -20,6 +20,7 @@ services:
       - TEACHME_COURSE_SERVICE_URL=http://course-service
       - SPRING_DATA_MONGODB_URI=mongodb://user:pass@student-service-mongo-db:27017
       - SPRING_DATA_MONGODB_DATABASE=students
+      - GATEWAY_SERVER_URL=http://localhost:8888
     ports:
       - "8080"
       - "35729"
