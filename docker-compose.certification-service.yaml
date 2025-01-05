@@ -22,6 +22,7 @@ services:
       - PFX_PASSPHRASE=mysecurepassphrase
       - SIGNATURE_FIELD_NAME=Signature1
       - SIGNATURE_BOX=150,30,450,90
+      - KAFKA_BOOTSTRAP_SERVER=kafka:9092
       - QR_CODE_URL=https://www.youtube.com/watch?v=dQw4w9WgXcQ
       - MONGODB_URI_ADMIN=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}?authSource=admin
     ports:
