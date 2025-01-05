@@ -19,6 +19,7 @@ services:
       - SPRING_DATA_MONGODB_DATABASE=notifications
       - TEACHME_STUDENT_SERVICE_URL=http://student-service:8080
       - TEACHME_EMAIL_AZURE_FUNCTION_URL=http://mail-az-function
+      - GATEWAY_SERVER_URL=http://localhost:8888
     ports:
       - "7777:8080"
       - "35729"
