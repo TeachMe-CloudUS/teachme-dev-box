@@ -20,6 +20,7 @@ services:
       - SIGNATURE_BOX=150,30,450,90
       - KAFKA_BOOTSTRAP_SERVER=kafka:9092
       - QR_CODE_URL=https://www.youtube.com/watch?v=dQw4w9WgXcQ
+      - FLASK_ENV=development
     ports:
       - "8080"
       - "35729"
@@ -70,11 +71,6 @@ services:
   azurite:
     container_name: azurite
     image: mcr.microsoft.com/azure-storage/azurite:3.33.0
-    environment:
-      - AZURE_STORAGE_ACCOUNT_NAME=devstoreaccount1
-      - AZURE_STORAGE_ACCOUNT_KEY=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==
-      - BLOB_STORAGE_CONTAINER_NAME=certificates
-      - BLOB_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://azurite:10000/devstoreaccount1;
     expose:
       - 10000
       - 10001
@@ -83,14 +79,11 @@ services:
       - "11000:10000"  # Since 1000 is already in use
       - "11001:10001"  
       - "11002:10002"  
-    volumes:
-      - blob-storage-volume:/data mcr.microsoft.com/azure-storage/azurite
     networks:
       - teachme-network
 
 
 volumes:
-  blob-storage-volume:
   mongodb_data:
     driver: local
 
