@@ -5,7 +5,7 @@ services:
     build:
       context: ./services/teachme-certification-service/
       dockerfile: Dockerfile
-    container_name: certification_service
+    container_name: certification-service
     environment:
       - MONGO_DATABASE=certificate_db
       - MONGO_COLLECTION_NAME=student_certificates
@@ -24,8 +24,6 @@ services:
     ports:
       - "8080"
       - "35729"
-    volumes:
-      - ./services/teachme-certification-service/certificates:/certification-service/certificates
     depends_on:
       mongodb:
         condition: service_healthy
@@ -81,7 +79,6 @@ services:
       - "11002:10002"  
     networks:
       - teachme-network
-
 
 volumes:
   mongodb_data:
